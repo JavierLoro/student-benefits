@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Beneficios Estudiante 2026</title>
+
+<!-- Open Graph -->
+<meta property="og:title" content="Beneficios Estudiante 2026">
+<meta property="og:description" content="Todo lo que puedes solicitar como universitario en 2026: herramientas gratis, saldos cloud, descuentos y más. Filtra y descubre los 44 beneficios.">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="es_ES">
+
+<!-- Twitter / X Card -->
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Beneficios Estudiante 2026">
+<meta name="twitter:description" content="44 beneficios para universitarios: GitHub Copilot, JetBrains, Azure, Figma, Spotify y mucho más. Gratis o con descuento.">
+
+<!-- SEO -->
+<meta name="description" content="Guía completa de beneficios para estudiantes universitarios en 2026. Herramientas de desarrollo, cloud, diseño, educación y más, gratis o con descuento.">
+<meta name="keywords" content="beneficios estudiante, github student pack, jetbrains gratis, azure estudiantes, figma gratis, spotify student, 2026">
+<meta name="author" content="jlc-dev.me">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=IBM+Plex+Sans:wght@300;400;500&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header>
+  <div class="inner">
+    <h1 data-i18n="title" data-i18n-html>Beneficios<br><em>Estudiante</em></h1>
+    <p class="subtitle" data-i18n="subtitle">Todo lo que puedes solicitar como universitario en 2026. Filtra, ordena y descubre.</p>
+    <div class="lang-switch">
+      <button id="lang-toggle-es" class="lang-btn active" onclick="setLang('es')">ES</button>
+      <button id="lang-toggle-en" class="lang-btn" onclick="setLang('en')">EN</button>
+    </div>
+  </div>
+</header>
+
+<div class="stats-bar">
+  <div class="stat-chip total" onclick="filterStat('total')" id="chip-total"><span class="num" id="sTotal">44</span><span class="lbl" data-i18n="stat_total">beneficios</span></div>
+  <div class="stat-chip free" onclick="filterStat('free')" id="chip-free"><span class="num" id="sGratis">0</span><span class="lbl" data-i18n="stat_free">gratis</span></div>
+  <div class="stat-chip credits" onclick="filterStat('credits')" id="chip-credits"><span class="num" id="sCred">0</span><span class="lbl" data-i18n="stat_credits">saldo gratuito</span></div>
+  <div class="stat-chip disc" onclick="filterStat('disc')" id="chip-disc"><span class="num" id="sDesc">0</span><span class="lbl" data-i18n="stat_discount">descuento</span></div>
+  <div class="stat-chip high" onclick="filterStat('high')" id="chip-high"><span class="num" id="sAlta">0</span><span class="lbl" data-i18n="stat_high">utilidad alta</span></div>
+</div>
+
+<div class="drawer-overlay" id="drawer-overlay" onclick="closeDrawer()"></div>
+
+<div class="page-body">
+
+  <!-- SIDEBAR / DRAWER -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-drag-handle"></div>
+    <div class="sidebar-search">
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="6" cy="6" r="4.5" stroke="#1c1a15" stroke-width="1.3"/><path d="M9.5 9.5L12.5 12.5" stroke="#1c1a15" stroke-width="1.3" stroke-linecap="round"/></svg>
+      <input type="text" id="search" placeholder="Buscar…" oninput="render()">
+    </div>
+
+    <div class="sidebar-sections-wrap">
+      <div class="sidebar-section">
+        <div class="sidebar-section-title" data-i18n="filter_category">Categoría</div>
+        <div class="checkbox-list" id="cb-cat">
+          <label class="cb-item" data-cat="dev"><input type="checkbox" value="dev" onchange="render()"><span class="cb-label"><span style="color:var(--c-dev)">●</span> <span data-i18n="cat_dev">Desarrollo</span></span><span class="cb-count" id="cnt-dev"></span></label>
+          <label class="cb-item" data-cat="cloud"><input type="checkbox" value="cloud" onchange="render()"><span class="cb-label"><span style="color:var(--c-cloud)">●</span> <span data-i18n="cat_cloud">Cloud/Hosting</span></span><span class="cb-count" id="cnt-cloud"></span></label>
+          <label class="cb-item" data-cat="design"><input type="checkbox" value="design" onchange="render()"><span class="cb-label"><span style="color:var(--c-design)">●</span> <span data-i18n="cat_design">Diseño</span></span><span class="cb-count" id="cnt-design"></span></label>
+          <label class="cb-item" data-cat="media"><input type="checkbox" value="media" onchange="render()"><span class="cb-label"><span style="color:var(--c-media)">●</span> <span data-i18n="cat_media">Media</span></span><span class="cb-count" id="cnt-media"></span></label>
+          <label class="cb-item" data-cat="edu"><input type="checkbox" value="edu" onchange="render()"><span class="cb-label"><span style="color:var(--c-edu)">●</span> <span data-i18n="cat_edu">Educación</span></span><span class="cb-count" id="cnt-edu"></span></label>
+          <label class="cb-item" data-cat="tools"><input type="checkbox" value="tools" onchange="render()"><span class="cb-label"><span style="color:var(--c-tools)">●</span> <span data-i18n="cat_tools">Herramientas</span></span><span class="cb-count" id="cnt-tools"></span></label>
+          <label class="cb-item" data-cat="domain"><input type="checkbox" value="domain" onchange="render()"><span class="cb-label"><span style="color:var(--c-domain)">●</span> <span data-i18n="cat_domain">Dominio/SSL</span></span><span class="cb-count" id="cnt-domain"></span></label>
+        </div>
+      </div>
+
+      <div class="sidebar-section">
+        <div class="sidebar-section-title" data-i18n="filter_price">Precio</div>
+        <div class="checkbox-list">
+          <label class="cb-item" data-price="Gratis"><input type="checkbox" value="Gratis" onchange="render()"><span class="cb-label"><span style="color:var(--price-free)">●</span> <span data-i18n="price_free">Gratis</span></span><span class="cb-count" id="cnt-Gratis"></span></label>
+          <label class="cb-item" data-price="Saldo gratuito"><input type="checkbox" value="Saldo gratuito" onchange="render()"><span class="cb-label"><span style="color:var(--price-credits)">●</span> <span data-i18n="price_credits">Saldo gratuito</span></span><span class="cb-count" id="cnt-Saldo"></span></label>
+          <label class="cb-item" data-price="Descuento"><input type="checkbox" value="Descuento" onchange="render()"><span class="cb-label"><span style="color:var(--price-discount)">●</span> <span data-i18n="price_discount">Descuento</span></span><span class="cb-count" id="cnt-Descuento"></span></label>
+        </div>
+      </div>
+
+      <div class="sidebar-section">
+        <div class="sidebar-section-title" data-i18n="filter_util">Utilidad</div>
+        <div class="checkbox-list">
+          <label class="cb-item" data-util="Alta"><input type="checkbox" value="Alta" onchange="render()"><span class="cb-label"><span style="color:#1a5c2a">●</span> <span data-i18n="util_high">Alta</span></span><span class="cb-count" id="cnt-Alta"></span></label>
+          <label class="cb-item" data-util="Media"><input type="checkbox" value="Media" onchange="render()"><span class="cb-label"><span style="color:#7a4800">●</span> <span data-i18n="util_medium">Media</span></span><span class="cb-count" id="cnt-Media"></span></label>
+          <label class="cb-item" data-util="Baja"><input type="checkbox" value="Baja" onchange="render()"><span class="cb-label"><span style="color:var(--muted)">●</span> <span data-i18n="util_low">Baja</span></span><span class="cb-count" id="cnt-Baja"></span></label>
+        </div>
+      </div>
+    </div>
+
+    <button class="btn-reset-sidebar" data-i18n="reset_filters" onclick="resetFilters()">↺ Limpiar filtros</button>
+  </aside>
+
+  <!-- MAIN -->
+  <div class="main-content">
+    <div class="active-filters" id="active-filters"></div>
+    <div class="result-count" id="resultCount"></div>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th onclick="sort('name')" id="th-name"><span data-i18n="col_benefit">Beneficio</span> <span class="sort-arrow" id="sa-name">↕</span></th>
+            <th><span data-i18n="col_note">Nota</span></th>
+            <th onclick="sort('cat')" id="th-cat"><span data-i18n="col_category">Categoría</span> <span class="sort-arrow" id="sa-cat">↕</span></th>
+            <th onclick="sort('util')" id="th-util" class="active"><span data-i18n="col_utility">Utilidad</span> <span class="sort-arrow" id="sa-util">↑</span></th>
+            <th onclick="sort('price')" id="th-price"><span data-i18n="col_price">Precio</span> <span class="sort-arrow" id="sa-price">↕</span></th>
+            <th onclick="sort('via')" id="th-via"><span data-i18n="col_via">Vía</span> <span class="sort-arrow" id="sa-via">↕</span></th>
+            <th onclick="sort('time')" id="th-time"><span data-i18n="col_duration">Duración</span> <span class="sort-arrow" id="sa-time">↕</span></th>
+          </tr>
+        </thead>
+        <tbody id="tbody"></tbody>
+      </table>
+      <div class="cards-list" id="cards-list"></div>
+    </div>
+  </div>
+
+</div>
+
+<!-- Mobile FAB -->
+<button class="filter-fab" id="filter-fab" onclick="openDrawer()">
+  <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 3h12M3 7h8M5 11h4" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"/></svg>
+  <span data-i18n="fab_filters">FILTROS</span>
+  <span class="fab-count" id="fab-count"></span>
+</button>
+
+<script src="translations.js"></script>
+<script src="data.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
